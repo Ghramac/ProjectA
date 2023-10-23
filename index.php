@@ -1,3 +1,7 @@
+<?php 
+include("db/conexao.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +15,12 @@
         <nav>
             <a href="index.php?menuop=home">Home</a> |
             <a href="index.php?menuop=adocao">Adoção</a> |
-            <a href="index.php?menuop=resgate">Resgate</a> |
+            <a href="index.php?menuop=resgatar">Resgate</a> |
             <a href="index.php?menuop=dados">Dados</a>
         </nav>
     </header>
     <main>
+        <hr>
         <?php
             $menuop = (isset($_GET["menuop"])) ? $_GET["menuop"] : "home";
             switch ($menuop) {
@@ -25,8 +30,11 @@
                 case 'adocao':
                     include('paginas/adocao/adocao.php');
                     break;
-                case 'resgate':
-                    include('paginas/cadastropet/cadastropet.php');
+                case 'resgatar':
+                    include('paginas/resgatar/resgatar.php');
+                    break;
+                case 'cad-resgatar':
+                    include('paginas/resgatar/cad-resgatar.php');
                     break;
                 case 'dados':
                     include('paginas/dados/dados.php');

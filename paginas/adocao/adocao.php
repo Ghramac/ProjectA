@@ -1,1 +1,3 @@
-<h3>Adoção</h3>
+<header>
+    <h3>Adoção</h3>
+</header>
