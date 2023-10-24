@@ -36,6 +36,9 @@ include("db/conexao.php");
                 case 'cad-resgatar':
                     include('paginas/resgatar/cad-resgatar.php');
                     break;
+                case 'inserir-resgatar':
+                    include('paginas/resgatar/inserir-resgatar.php');
+                    break;
                 case 'dados':
                     include('paginas/dados/dados.php');
                     break;
