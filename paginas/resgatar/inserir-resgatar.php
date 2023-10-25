@@ -8,19 +8,17 @@
     $numResgatar = mysqli_real_escape_string($conexao,$_POST["numResgatar"]);
     $bairroResgatar = mysqli_real_escape_string($conexao,$_POST["bairroResgatar"]);
     $sql = "INSERT INTO tbresgatar (
-        especieResgatar,
-        quantResgatar,
-        ruaResgatar,
-        numResgatar,
+        especieResgatar, 
+        quantResgatar, 
+        ruaResgatar, 
+        numResgatar, 
         bairroResgatar)
         VALUES(
-            '{$especieResgatar}',
-            '{$quantResgatar}',
-            '{$ruaResgatar}',
-            '{$numResgatar}',
-            '{$bairroResgatar}',
-        )
-        ";
+            '{$especieResgatar}', 
+            '{$quantResgatar}', 
+            '{$ruaResgatar}', 
+            '{$numResgatar}', 
+            '{$bairroResgatar}')";
         mysqli_query($conexao,$sql) or die("Erro ao executar a consulta." . mysqli_error($conexao));
         echo"O registro foi inserido com sucesso!";
 ?>
