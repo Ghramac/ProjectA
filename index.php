@@ -39,6 +39,15 @@ include("db/conexao.php");
                 case 'inserir-resgatar':
                     include('paginas/resgatar/inserir-resgatar.php');
                     break;
+                case 'editar-resgatar':
+                    include('paginas/resgatar/editar-resgatar.php');
+                    break;
+                case 'excluir-resgatar':
+                    include('paginas/resgatar/excluir-resgatar.php');
+                    break;
+                case 'atualizar-resgatar':
+                    include('paginas/resgatar/atualizar-resgatar.php');
+                    break;
                 case 'dados':
                     include('paginas/dados/dados.php');
                     break;
