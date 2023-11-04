@@ -1,16 +1,21 @@
 <header>
-    <h3>Resgate</h3>
+    <h3><i class="bi bi-hourglass"></i> Resgate</h3>
 </header>
 <div>
-    <a href="index.php?menuop=cad-resgatar">Novo Cadastro</a>
+    <a class="btn btn-outline-info mb-2" href="index.php?menuop=cad-resgatar"><i class="bi bi-clipboard-plus"></i> Novo Cadastro</a>
 </div>
 <div>
     <form action="index.php?menuop=resgatar" method="post">
-        <input type="text" name="txt_pesquisa">
-        <input type="submit" value="Pesquisar">
+        <div class="input-group">
+            <input class="form-control" type="text" name="txt_pesquisa">
+            <button class="btn btn-outline-primary btn-sm" type="submit"><i class="bi bi-search"></i> Pesquisar</button>    
+        </div>
+        
     </form>
 </div>
-<table border="1">
+
+<div class="tabela">
+<table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>ID</th>
@@ -49,6 +54,7 @@
         FROM tbresgatar 
         WHERE 
         idResgatar='{$txt_pesquisa}' or
+        especieResgatar LIKE '%{$txt_pesquisa}%' or
         ruaResgatar LIKE '%{$txt_pesquisa}%' or
         bairroResgatar LIKE '%{$txt_pesquisa}%'
 
@@ -62,11 +68,12 @@
             <td><?=$dados["idResgatar"] ?></td>
             <td><?=$dados["especieResgatar"] ?></td>
             <td><?=$dados["quantResgatar"] ?></td>
-            <td><?=$dados["ruaResgatar"] ?></td>
+            <td class="text-nowrap"><?=$dados["ruaResgatar"] ?></td>
             <td><?=$dados["numResgatar"] ?></td>
-            <td><?=$dados["bairroResgatar"] ?></td>
-            <td><a href="index.php?menuop=editar-resgatar&idResgatar=<?=$dados["idResgatar"] ?>">Editar</a></td>
-            <td><a href="index.php?menuop=excluir-resgatar&idResgatar=<?=$dados["idResgatar"] ?>">Excluir</a></td>
+            <td class="text-nowrap"><?=$dados["bairroResgatar"] ?></td>
+
+            <td class="text-center"><a class="btn btn-outline-primary btn-sm" href="index.php?menuop=editar-resgatar&idResgatar=<?=$dados["idResgatar"] ?>"><i class="bi bi-pencil"></i></a></td>
+            <td class="text-center"><a class="btn btn-outline-danger btn-sm" href="index.php?menuop=excluir-resgatar&idResgatar=<?=$dados["idResgatar"] ?>"><i class="bi bi-trash"></i></a></td>
             
         </tr>
         <?php 
@@ -74,37 +81,43 @@
         ?>
     </tbody>
 </table>
-<br>
+</div>
+
+<ul class="pagination justify-content-center">
 <?php 
     $sqlTotal = "SELECT idResgatar FROM tbresgatar";
     $qrTotal = mysqli_query($conexao,$sqlTotal) or die( mysqli_error($conexao));
     $numTotal = mysqli_num_rows($qrTotal);
-    $totalPagina = ceil($numTotal / $quantidade);
-    echo "Total de Resgistros: $numTotal <br>";
-    echo '<a href="?menuop=restagar&pagina=1">Primeira Pagina</a>';
 
-    if($pagina>6){
+    $totalPagina = ceil($numTotal / $quantidade);
+
+    echo "<li class='page-item'><span class='page-link'>Total: " . $numTotal . "</span></li>";
+
+    echo '<li class="page-item"><a class="page-link" href="?menuop=resgatar&pagina=1">Primeira</a></li>';
+
+    if($pagina>3){
         ?>
-            <a href="?menuop=resgatar&pagina=<?php echo $pagina+1?>"> << </a>
+            <li class="page-item"><a class="page-link" href="?menuop=resgatar&pagina=<?php echo $pagina-1?>"><<</a></li>
         <?php 
     }
 
-    for ($i = 1; $i <= $totalPagina; $i++){
+    for ($i=1;$i<=$totalPagina;$i++){
 
-        if($i>=($pagina-3) && $i <= ($pagina+3)){
+        if($i>=($pagina-2) && $i <= ($pagina+2)){
             if($i == $pagina){
-                echo $i;
+                echo "<li class='page-item active'><span class='page-link'>$i</span></li>";
             }else{
-                echo "<a href=\"?menuop=restagar&pagina=$i\">$i</a> ";
+                echo "<li class='page-item'><a class='page-link' href=\"?menuop=restagar&pagina={$i}\">{$i}</a></li>";
             }
         }
     }
 
-    if($pagina< ($totalPagina-5)){
+    if($pagina< ($totalPagina-2)){
         ?>
-            <a href="?menuop=resgatar&pagina=<?php echo $pagina+1?>"> >> </a>
+            <li class="page-item"><a class="page-link" href="?menuop=resgatar&pagina=<?php echo $pagina+1?>">>></a></li>
         <?php 
     }
 
-    echo "<a href=\"?menuop=restagar&pagina=$totalPagina\">Ultima Pagina</a>";
+    echo "<li class='page-item'><a class='page-link' href=\"?menuop=resgatar&pagina=$totalPagina\">Ultima</a></li>";
 ?>
+</ul>

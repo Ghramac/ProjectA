@@ -1,1 +1,1 @@
-<h3>Página Principal</h3>
+<h3><i class="bi bi-house"></i> Página Principal</h3>
